@@ -1,5 +1,6 @@
-import requests
 from klein import run, route
+import os 
+import requests
 
 SEMANTIC_SCHOLAR_BASE_URL = "https://api.semanticscholar.org/"
 
@@ -42,4 +43,5 @@ def citations_by_ssid(request, semantic_scholar_id, fields):
     response = requests.get(f"{SEMANTIC_SCHOLAR_BASE_URL}{PAPER_ENDPOINT}{semantic_scholar_id}/{CITATIONS_BRANCH}?fields={fields}")
     return response.content
 
-run("localhost", 8080)
+port = int(os.environ.get("PORT", 8080))
+run(host = "0.0.0.0", port = port)
